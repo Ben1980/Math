@@ -1,1 +1,5 @@
-
+{
+    //CUSTOM CONTAINER SECTION
+    "name": "Codespaces",
+    "dockerFile": "customImage.dockerfile",
+  }
