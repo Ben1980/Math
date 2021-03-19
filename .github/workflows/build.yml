@@ -24,13 +24,18 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      
+      - name: Install vcpkg dependencies
+        run: ./vcpkg/vcpkg install fmt doctest
+      
+      - name: Create build directories
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+             mkdir -p build
+             mv buildutils build/buildutils
+             
+      - name: Setup cmake and build artifacts
+        run: |
+             cd build
+             cmake -DCMAKE_TOOLCHAIN_FILE=/vcpkg/scripts/buildsystems/vcpkg.cmake ..
+             cmake --build . --config Release
+             
