@@ -10,11 +10,20 @@ on:
   pull_request:
     branches: [ master ]
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+  job:
+    name: ${{ matrix.os }}-hosted-cmakesettingsjson-cache-submod_vcpkg
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        include:
+          - os: ubuntu-latest
+            triplet: x64-linux
+            configuration: 'Linux.*'
+            
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
@@ -25,18 +34,30 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       
-      - name: run-vcpkg
-        uses: lukka/run-vcpkg@v7.1
+      - uses: lukka/get-cmake@latest
+      
+      - name: Set vcpkg's response file path used as part of cache's key.
+        uses: lukka/set-shell-env@latest
         with:
-          setupOnly: true
-        
-      - run: |
-          $VCPKG_ROOT/vcpkg install boost:linux-x64
-          shell: bash
+          VCPKGRESPONSEFILE: ${{ github.workspace }}/cmakesettingsjson/vcpkg_${{ matrix.triplet }}.txt
+          filter: VCPKGRESPONSEFILE
+          
+      - name: Restore artifacts, run vcpkg, build and cache artifacts
+        uses: lukka/run-vcpkg@latest
+        id: runvcpkg
+        with:
+          vcpkgArguments: '@${{ env.VCPKGRESPONSEFILE }}'
+          vcpkgDirectory: '${{ github.workspace }}/vcpkg'
+          # Ensure the cache key changes any time the content of the response file changes.
+          appendedCacheKey: ${{ hashFiles( env.VCPKGRESPONSEFILE ) }}
+      
+      - name: Prints output of run-vcpkg's task
+        run: echo "root='${{ steps.runvcpkg.outputs.RUNVCPKG_VCPKG_ROOT_OUT }}', triplet='${{ steps.runvcpkg.outputs.RUNVCPKG_VCPKG_TRIPLET_OUT }}' "
         
       - name: Install vcpkg dependencies
         run: |
           $VCPKG_ROOT/vcpkg install fmt doctest
+          shell: bash
       
       - name: Create build directories
         run: |
