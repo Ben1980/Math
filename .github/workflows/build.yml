@@ -23,11 +23,6 @@ jobs:
           - os: ubuntu-latest
             triplet: x64-linux
             configuration: 'Linux.*'
-            
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
