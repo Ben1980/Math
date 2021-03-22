@@ -27,9 +27,16 @@ jobs:
       
       - name: run-vcpkg
         uses: lukka/run-vcpkg@v7.1
+        with:
+          setupOnly: true
+        
+      - run: |
+          $VCPKG_ROOT/vcpkg install boost:linux-x64
+          shell: bash
         
       - name: Install vcpkg dependencies
-        run: ./vcpkg/vcpkg install fmt doctest
+        run: |
+          $VCPKG_ROOT/vcpkg install fmt doctest
       
       - name: Create build directories
         run: |
