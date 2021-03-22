@@ -28,6 +28,7 @@ jobs:
       - name: run-vcpkg
         uses: lukka/run-vcpkg@v7.1
         with:
+          vcpkgDirectory: '${{ github.workspace }}/vcpkg'
           setupOnly: true
         
       - run: |
