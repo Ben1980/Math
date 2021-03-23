@@ -23,11 +23,17 @@ jobs:
           - os: ubuntu-latest
             triplet: x64-linux
             configuration: 'Linux.*'
-
+            vcpkgCommitId: '30124253eecff36bc90f73341edbfb4f845e2a1e'
+    
+    env:
+      buildDir: '${{ github.workspace }}/b/vcpkg_submod_manifest'
+      
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+        with:
+          submodules: true
       
       - uses: lukka/get-cmake@latest
       
@@ -37,31 +43,29 @@ jobs:
           VCPKGRESPONSEFILE: ${{ github.workspace }}/cmakesettingsjson/vcpkg_${{ matrix.triplet }}.txt
           filter: VCPKGRESPONSEFILE
           
-      - name: Restore artifacts, run vcpkg, build and cache artifacts
+      - name: Restore artifacts, or setup vcpkg (do not install any package)
         uses: lukka/run-vcpkg@main
         id: runvcpkg
         with:
-          vcpkgArguments: '@${{ env.VCPKGRESPONSEFILE }}'
-          vcpkgDirectory: '${{ github.workspace }}/vcpkg'
-          # Ensure the cache key changes any time the content of the response file changes.
-          appendedCacheKey: ${{ hashFiles( env.VCPKGRESPONSEFILE ) }}
+          setupOnly: true
+          vcpkgDirectory: '${{ runner.workspace }}/b/vcpkg'
+          vcpkgGitCommitId: '${{ matrix.vcpkgCommitId}}'
+          # Ensure the cache key changes any time the content of the manifest file changes.
+          appendedCacheKey: ${{ hashFiles( '**/vcpkg_manifest/vcpkg.json' ) }}
+          vcpkgTriplet: ${{ matrix.triplet }}
+          # Ensure the vcpkg artifacts are cached, they are generated in the 'CMAKE_BINARY_DIR/vcpkg_installed'.
+          additionalCachedPaths: ${{ env.buildDir }}
       
       - name: Prints output of run-vcpkg's task
         run: echo "root='${{ steps.runvcpkg.outputs.RUNVCPKG_VCPKG_ROOT_OUT }}', triplet='${{ steps.runvcpkg.outputs.RUNVCPKG_VCPKG_TRIPLET_OUT }}' "
         
-      - name: Install vcpkg dependencies
-        run: |
-          $VCPKG_ROOT/vcpkg install fmt doctest
-          shell: bash
-      
-      - name: Create build directories
-        run: |
-             mkdir -p build
-             mv buildutils build/buildutils
-             
-      - name: Setup cmake and build artifacts
-        run: |
-             cd build
-             cmake -DCMAKE_TOOLCHAIN_FILE=/vcpkg/scripts/buildsystems/vcpkg.cmake ..
-             cmake --build . --config Release
+      - name: Run CMake with vcpkg.json manifest
+        uses: lukka/run-cmake@main
+        with:
+          cmakeListsOrSettingsJson: CMakeListsTxtAdvanced
+          cmakeListsTxtPath: '${{ github.workspace }}/vcpkg_manifest/CMakeLists.txt'
+          useVcpkgToolchainFile: true
+          buildDirectory: '${{ env.buildDir }}'
+          cmakeAppendedArgs: '"-GNinja Multi-Config" -DVCPKG_TARGET_TRIPLET=${{ matrix.triplet}} '
+          buildWithCMake: true
              
