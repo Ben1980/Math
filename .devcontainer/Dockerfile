@@ -40,7 +40,7 @@ RUN git clone https://github.com/Microsoft/vcpkg ${VCPKG_ROOT} \
     # This is (for now) the way vcpkg handles versioning: freezing the cloned repo at a specific commit!
     # See https://github.com/microsoft/vcpkg/issues/1681.
     && git reset --hard 0bf3923f9fab4001c00f0f429682a0853b5749e0 \
-    && ./bootstrap-vcpkg.sh
+    && ./bootstrap-vcpkg.sh -disableMetrics
 
 ENV PATH "${VCPKG_ROOT}:${PATH}"
 
