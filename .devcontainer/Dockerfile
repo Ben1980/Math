@@ -20,7 +20,7 @@ RUN apt-get update \
     && export DEBIAN_FRONTEND=noninteractive \
     #
     # Install C++ tools and Git
-    && apt-get -y install build-essential gdb cmake cppcheck git zip unzip \
+    && apt-get -y install build-essential gdb cmake cppcheck git zip unzip pkg-config \
     #
     # [Optional] Update UID/GID if needed
     && if [ "$USER_GID" != "1000" ] || [ "$USER_UID" != "1000" ]; then \
