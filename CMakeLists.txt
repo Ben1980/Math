@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.12)
-project(PROJECTNAME VERSION 0.1.0)
+project(math VERSION 0.1.0)
 
 if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE Release)

@@ -11,7 +11,7 @@
             "preLaunchTask": "Generate executable",
             // This file is executed when F5 is pressed.
             // It's the executable generated and compiled by CMake (during the preLaunchTask).
-            "program": "${fileDirname}/build/${fileBasenameNoExtension}",
+            "program": "${workspaceFolder}/build/app/mathtests",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
