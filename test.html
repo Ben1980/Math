@@ -73,9 +73,11 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><dl class="reflist">
-<dt>Member <a class="el" href="namespaceLibrary.html#ac9944923e38b93e4cc3ea76fe3064e40">Library::PrintHelloWorld</a>  (const std::string &amp;str)</dt>
-<dd><p class="startdd"><a class="anchor" id="_test000001"></a>Test 1: At vero eos et accusam et justo duo dolores </p>
-<p class="enddd">Test 2: At vero eos et accusam et justo duo dolores</p>
+<dt>Member <a class="el" href="namespaceNumLib.html#ac17517f46e5598287adc1aa17b70affc">NumLib::TrapezoidalIntegration</a>  (double x1, double x2, size_t N, const std::function&lt; double(double)&gt; &amp;f)</dt>
+<dd><p class="startdd"><a class="anchor" id="_test000001"></a>Test TrapezoidalIntegration, valid case: Testing method with function \(I=\int_0^{\pi/2} \frac{5}{e^\pi-2}\exp(2x)\cos(x)dx=1.0\) </p>
+<p class="interdd">Test TrapezoidalIntegration, x1=x2=0: Testing method with zero range </p>
+<p class="interdd">Test TrapezoidalIntegration, N=0: Testing method with zero iteration steps </p>
+<p class="enddd">Test TrapezoidalIntegration, f=nullptr: Testing method with error in function f</p>
 </dd>
 </dl>
 </div></div><!-- contents -->
