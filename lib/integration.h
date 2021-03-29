@@ -79,7 +79,7 @@ namespace NumLib {
   /**
    * @brief A numerical integration method using the romberg approach
    * 
-   * RombergIntegration is using the simpson approach to acomplish numerical integrations as described at [thoughts-on-coding.com](https://thoughts-on-coding.com/2019/04/17/numerical-methods-in-cpp-part-1-newton-cotes-integration/)
+   * RombergIntegration is using the romberg approach to acomplish numerical integrations as described at [thoughts-on-coding.com](https://thoughts-on-coding.com/2019/04/17/numerical-methods-in-cpp-part-1-newton-cotes-integration/)
    * and calculates the integral of function \f$f\f$ in range \f$[a-b]\f$.
    * 
    * \f[
@@ -108,6 +108,30 @@ namespace NumLib {
    */
   std::vector<std::vector<double>> RombergIntegration(double x1, double x2, size_t N, const std::function<double (double)> &f);
 
+  /**
+   * @brief A numerical integration method using the Gauss-Legendre approach
+   * 
+   * GaussLegendreIntegration is using the Gauss-Legendre approach to acomplish numerical integrations as described at [thoughts-on-coding.com](https://thoughts-on-coding.com/2019/04/25/numerical-methods-in-cpp-part-2-gauss-legendre-integration/)
+   * and calculates the integral of function \f$f\f$ in range \f$[a-b]\f$.
+   * 
+   * \f[
+   * 
+   * \f]
+   * 
+   * @image html legendrepolynoms.png
+   * 
+   * @test Test GaussLegendreIntegration, valid case: Testing method with function \f$I=\int_0^{\pi/2} \frac{5}{e^\pi-2}\exp(2x)\cos(x)dx=1.0\f$
+   * @test Test GaussLegendreIntegration, x1=x2=0: Testing method with zero range
+   * @test Test GaussLegendreIntegration, N=0: Testing method with zero iteration steps
+   * @test Test GaussLegendreIntegration, f=nullptr: Testing method with error in function f
+   * 
+   * @param x1 begining of Integration range \f$x_1=a\f$
+   * @param x2 end of Integration range \f$x_2=b\f$
+   * @param N number of iteration steps
+   * @param f function \f$f\f$ to integrate
+   * 
+   * @return Integral of function \f$f\f$ in range \f$[a-b]\f$
+   */
   class GaussLegendreIntegration {
     public:
       double operator () (double x1, double x2, size_t N, const std::function<double (double)> &f) const;

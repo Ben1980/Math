@@ -71,3 +71,7 @@ std::vector<std::vector<double>> NumLib::RombergIntegration(double x1, double x2
 
     return romberg_integral;
 }
+
+double NumLib::GaussLegendreIntegration::operator () (double x1, double x2, size_t N, const std::function<double (double)> &f) const {
+
+}
