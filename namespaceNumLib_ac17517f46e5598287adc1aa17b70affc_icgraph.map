@@ -1,4 +1,5 @@
 <map id="NumLib::TrapezoidalIntegration" name="NumLib::TrapezoidalIntegration">
-<area shape="rect" id="node1" title="A numerical integration method using the trapezoidal approach." alt="" coords="151,5,352,32"/>
-<area shape="rect" id="node2" href="$integration_8h.html#a3647f44eb2241c191ce095ac82684873" title=" " alt="" coords="5,5,103,32"/>
+<area shape="rect" id="node1" title="A numerical integration method using the trapezoidal approach." alt="" coords="240,31,441,57"/>
+<area shape="rect" id="node2" href="$namespaceNumLib.html#aab774f3c358b2e55fc8026294d90eef2" title="A numerical integration method using the romberg approach." alt="" coords="5,5,192,32"/>
+<area shape="rect" id="node3" href="$integration_8h.html#a3647f44eb2241c191ce095ac82684873" title=" " alt="" coords="50,56,147,83"/>
 </map>

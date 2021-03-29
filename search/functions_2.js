@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['simpsonintegration_41',['SimpsonIntegration',['../namespaceNumLib.html#a4a6af2e9f818b41da2ae8fa547760def',1,'NumLib']]]
+  ['rombergintegration_42',['RombergIntegration',['../namespaceNumLib.html#aab774f3c358b2e55fc8026294d90eef2',1,'NumLib']]]
 ];

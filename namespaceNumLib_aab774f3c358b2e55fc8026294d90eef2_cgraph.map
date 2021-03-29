@@ -1,0 +1,4 @@
+<map id="NumLib::RombergIntegration" name="NumLib::RombergIntegration">
+<area shape="rect" id="node1" title="A numerical integration method using the romberg approach." alt="" coords="5,5,192,32"/>
+<area shape="rect" id="node2" href="$namespaceNumLib.html#ac17517f46e5598287adc1aa17b70affc" title="A numerical integration method using the trapezoidal approach." alt="" coords="240,5,441,32"/>
+</map>
