@@ -107,6 +107,42 @@ namespace NumLib {
    * @return Integral of function \f$f\f$ in range \f$[a-b]\f$
    */
   std::vector<std::vector<double>> RombergIntegration(double x1, double x2, size_t N, const std::function<double (double)> &f);
+
+  class GaussLegendreIntegration {
+    public:
+      double operator () (double x1, double x2, size_t N, const std::function<double (double)> &f) const;
+
+    private:
+      class LegendrePolynomial {
+        public:
+            LegendrePolynomial(double lowerBound, double upperBound, size_t numberOfIterations);
+
+            const std::vector<double> & getWeight() const;
+
+            const std::vector<double> & getRoot() const;
+
+        private:
+            const static double EPSILON;
+
+            struct Result {
+                double value;
+                double derivative;
+
+                Result() : value(0), derivative(0) {}
+                Result(double val, double deriv) : value(val), derivative(deriv) {}
+            };
+
+            void calculateWeightAndRoot();
+
+            Result calculatePolynomialValueAndDerivative(double x);
+
+            const double mLowerBound;
+            const double mUpperBound;
+            const int mNumberOfIterations;
+            std::vector<double> mWeight;
+            std::vector<double> mRoot;
+        };
+  };
 };
 
 #include "testUtils.h"
