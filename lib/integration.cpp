@@ -38,3 +38,36 @@ double NumLib::SimpsonIntegration(double x1, double x2, size_t N, const std::fun
     
     return 0;
 }
+
+std::vector<std::vector<double>> NumLib::RombergIntegration(double x1, double x2, size_t N, const std::function<double (double)> &f) {
+    if(N < 1 ) N = 1;
+    std::vector<std::vector<double>> romberg_integral(N, std::vector<double>(N));
+    
+    if(f) {
+
+        //R(0,0) Start with trapezoidal integration with N = 1
+        romberg_integral.front().front() = NumLib::TrapezoidalIntegration(x1, x2, 1, f);
+
+        double h = x2-x1;
+        for(size_t step = 1; step < N; step++) {
+            h *= 0.5;
+
+            //R(step, 0) Improve trapezoidal integration with decreasing h
+            double trapezoidal_integration = 0;
+            size_t stepEnd = pow(2, step - 1);
+            for(size_t tzStep = 1; tzStep <= stepEnd; tzStep++) {
+                const double deltaX = (2*tzStep - 1)*h;
+                trapezoidal_integration += f(x1 + deltaX);
+            }
+            romberg_integral[step].front() = 0.5*romberg_integral[step - 1].front() + trapezoidal_integration*h;
+
+            //R(m,n) Romberg integration with R(m,1) -> Simpson rule, R(m,2) -> Boole's rule
+            for(size_t rbStep = 1; rbStep <= step; rbStep++) {
+                const double k = pow(4, rbStep);
+                romberg_integral[step][rbStep] = (k*romberg_integral[step][rbStep-1] - romberg_integral[step-1][rbStep-1])/(k-1);
+            }
+        }
+    }
+
+    return romberg_integral;
+}
