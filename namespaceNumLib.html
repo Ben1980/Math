@@ -127,26 +127,23 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>A numerical integration method using the romberg approach. </p>
-<p>SimpsonIntegration is using the simpson approach to acomplish numerical integrations as described at <a href="https://thoughts-on-coding.com/2019/04/17/numerical-methods-in-cpp-part-1-newton-cotes-integration/">thoughts-on-coding.com</a> and calculates the integral of function \(f\) in range \([a-b]\).</p>
+<p>RombergIntegration is using the simpson approach to acomplish numerical integrations as described at <a href="https://thoughts-on-coding.com/2019/04/17/numerical-methods-in-cpp-part-1-newton-cotes-integration/">thoughts-on-coding.com</a> and calculates the integral of function \(f\) in range \([a-b]\).</p>
 <p class="formulaDsp">
-\[ w=\frac{b-a}{N} \]
+\[ R\left( 0,0 \right)=h_1\left( f\left( a \right) + f\left( b \right)\right) \]
 </p>
  <p class="formulaDsp">
-\[ x_i=a+i \cdot w \]
+\[ R\left( n,0 \right)=\frac{1}{2}R\left( n-1,0 \right)+h_n\sum_{k=1}^{2^{\pi-1}}f\left( a+\left( 2k-1 \right)h_n \right) \]
 </p>
  <p class="formulaDsp">
-\[ x_{i+1}=a+\left( i+1 \right) \cdot w \]
-</p>
- <p class="formulaDsp">
-\[ I=\textstyle \sum_{0}^{N}\frac{x_{i+1}-x_i}{6}\left( f(x_i)+4f\left( \frac{x_1+x_2}{2} \right)+f(x_{i+1}) \right) \]
+\[ R\left( n,m \right)=R\left( n,m-1 \right)+\frac{R\left( n,m-1 \right)-R\left( n-1,m-1 \right)}{4^m-1} \]
 </p>
 <div class="image">
-<img src="simpson.png" alt=""/>
+<img src="romberg.png" alt=""/>
 </div>
-<dl class="test"><dt><b><a class="el" href="test.html#_test000003">Test:</a></b></dt><dd><p class="startdd">Test SimpsonIntegration, valid case: Testing method with function \(I=\int_0^{\pi/2} \frac{5}{e^\pi-2}\exp(2x)\cos(x)dx=1.0\) </p>
-<p class="interdd">Test SimpsonIntegration, x1=x2=0: Testing method with zero range </p>
-<p class="interdd">Test SimpsonIntegration, N=0: Testing method with zero iteration steps </p>
-<p class="enddd">Test SimpsonIntegration, f=nullptr: Testing method with error in function f</p>
+<dl class="test"><dt><b><a class="el" href="test.html#_test000003">Test:</a></b></dt><dd><p class="startdd">Test RombergIntegration, valid case: Testing method with function \(I=\int_0^{\pi/2} \frac{5}{e^\pi-2}\exp(2x)\cos(x)dx=1.0\) </p>
+<p class="interdd">Test RombergIntegration, x1=x2=0: Testing method with zero range </p>
+<p class="interdd">Test RombergIntegration, N=0: Testing method with zero iteration steps </p>
+<p class="enddd">Test RombergIntegration, f=nullptr: Testing method with error in function f</p>
 </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
