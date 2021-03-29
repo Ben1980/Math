@@ -79,28 +79,25 @@ namespace NumLib {
   /**
    * @brief A numerical integration method using the romberg approach
    * 
-   * SimpsonIntegration is using the simpson approach to acomplish numerical integrations as described at [thoughts-on-coding.com](https://thoughts-on-coding.com/2019/04/17/numerical-methods-in-cpp-part-1-newton-cotes-integration/)
+   * RombergIntegration is using the simpson approach to acomplish numerical integrations as described at [thoughts-on-coding.com](https://thoughts-on-coding.com/2019/04/17/numerical-methods-in-cpp-part-1-newton-cotes-integration/)
    * and calculates the integral of function \f$f\f$ in range \f$[a-b]\f$.
    * 
    * \f[
-   * w=\frac{b-a}{N}
+   * R\left( 0,0 \right)=h_1\left( f\left( a \right) + f\left( b \right)\right)
    * \f]
    * \f[
-   * x_i=a+i \cdot w
+   * R\left( n,0 \right)=\frac{1}{2}R\left( n-1,0 \right)+h_n\sum_{k=1}^{2^{\pi-1}}f\left( a+\left( 2k-1 \right)h_n \right)
    * \f]
    * \f[
-   * x_{i+1}=a+\left( i+1 \right) \cdot w
-   * \f]
-   * \f[
-   * I=\textstyle \sum_{0}^{N}\frac{x_{i+1}-x_i}{6}\left( f(x_i)+4f\left( \frac{x_1+x_2}{2} \right)+f(x_{i+1}) \right)
+   * R\left( n,m \right)=R\left( n,m-1 \right)+\frac{R\left( n,m-1 \right)-R\left( n-1,m-1 \right)}{4^m-1}
    * \f]
    * 
-   * @image html simpson.png
+   * @image html romberg.png
    * 
-   * @test Test SimpsonIntegration, valid case: Testing method with function \f$I=\int_0^{\pi/2} \frac{5}{e^\pi-2}\exp(2x)\cos(x)dx=1.0\f$
-   * @test Test SimpsonIntegration, x1=x2=0: Testing method with zero range
-   * @test Test SimpsonIntegration, N=0: Testing method with zero iteration steps
-   * @test Test SimpsonIntegration, f=nullptr: Testing method with error in function f
+   * @test Test RombergIntegration, valid case: Testing method with function \f$I=\int_0^{\pi/2} \frac{5}{e^\pi-2}\exp(2x)\cos(x)dx=1.0\f$
+   * @test Test RombergIntegration, x1=x2=0: Testing method with zero range
+   * @test Test RombergIntegration, N=0: Testing method with zero iteration steps
+   * @test Test RombergIntegration, f=nullptr: Testing method with error in function f
    * 
    * @param x1 begining of Integration range \f$x_1=a\f$
    * @param x2 end of Integration range \f$x_2=b\f$
