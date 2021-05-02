@@ -73,7 +73,13 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><dl class="reflist">
-<dt>Member <a class="el" href="namespaceNumLib.html#aab774f3c358b2e55fc8026294d90eef2">NumLib::RombergIntegration</a>  (double x1, double x2, size_t N, const std::function&lt; double(double)&gt; &amp;f)</dt>
+<dt>Class <a class="el" href="classNumLib_1_1GaussLegendreIntegration.html">NumLib::GaussLegendreIntegration</a>  </dt>
+<dd><p class="startdd"><a class="anchor" id="_test000004"></a>Test <a class="el" href="classNumLib_1_1GaussLegendreIntegration.html" title="A numerical integration method using the Gauss-Legendre approach.">GaussLegendreIntegration</a>, valid case: Testing method with function \(I=\int_0^{\pi/2} \frac{5}{e^\pi-2}\exp(2x)\cos(x)dx=1.0\) </p>
+<p class="interdd">Test <a class="el" href="classNumLib_1_1GaussLegendreIntegration.html" title="A numerical integration method using the Gauss-Legendre approach.">GaussLegendreIntegration</a>, x1=x2=0: Testing method with zero range </p>
+<p class="interdd">Test <a class="el" href="classNumLib_1_1GaussLegendreIntegration.html" title="A numerical integration method using the Gauss-Legendre approach.">GaussLegendreIntegration</a>, N=0: Testing method with zero iteration steps </p>
+<p class="enddd">Test <a class="el" href="classNumLib_1_1GaussLegendreIntegration.html" title="A numerical integration method using the Gauss-Legendre approach.">GaussLegendreIntegration</a>, f=nullptr: Testing method with error in function f </p>
+</dd>
+<dt>Member <a class="el" href="namespaceNumLib.html#aa466c1887f2392cd7a11756fee1c4822">NumLib::RombergIntegration</a>  (double x1, double x2, size_t N, const std::function&lt; double(double)&gt; &amp;f)</dt>
 <dd><p class="startdd"><a class="anchor" id="_test000003"></a>Test RombergIntegration, valid case: Testing method with function \(I=\int_0^{\pi/2} \frac{5}{e^\pi-2}\exp(2x)\cos(x)dx=1.0\) </p>
 <p class="interdd">Test RombergIntegration, x1=x2=0: Testing method with zero range </p>
 <p class="interdd">Test RombergIntegration, N=0: Testing method with zero iteration steps </p>

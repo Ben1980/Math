@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['readme_2emd_13',['README.md',['../README_8md.html',1,'']]],
-  ['result_5ftree_14',['result_tree',['../namespacectest2JUnit.html#af9c3357e0b49da86171ddacd01d6127f',1,'ctest2JUnit']]],
-  ['rombergintegration_15',['RombergIntegration',['../namespaceNumLib.html#aab774f3c358b2e55fc8026294d90eef2',1,'NumLib']]]
+  ['legendrepolynomial_17',['LegendrePolynomial',['../classNumLib_1_1GaussLegendreIntegration_1_1LegendrePolynomial.html#a0c8e330864006da693dfc38481992d5b',1,'NumLib::GaussLegendreIntegration::LegendrePolynomial::LegendrePolynomial()'],['../classNumLib_1_1GaussLegendreIntegration_1_1LegendrePolynomial.html',1,'NumLib::GaussLegendreIntegration::LegendrePolynomial']]]
 ];

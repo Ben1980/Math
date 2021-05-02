@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['test_5fcase_44',['TEST_CASE',['../integration_8h.html#a3647f44eb2241c191ce095ac82684873',1,'TEST_CASE(&quot;Test TrapezoidalIntegration, valid case&quot;):&#160;integration.h'],['../integration_8h.html#aee019b3fdf30dbb7226056532a6a0f2f',1,'TEST_CASE(&quot;Test TrapezoidalIntegration, x1=x2=0&quot;):&#160;integration.h']]],
-  ['trapezoidalintegration_45',['TrapezoidalIntegration',['../namespaceNumLib.html#ac17517f46e5598287adc1aa17b70affc',1,'NumLib']]]
+  ['main_65',['main',['../main_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627',1,'main.cpp']]]
 ];

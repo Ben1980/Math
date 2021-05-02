@@ -69,12 +69,19 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">NumLib Namespace Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNumLib_1_1GaussLegendreIntegration.html">GaussLegendreIntegration</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A numerical integration method using the Gauss-Legendre approach.  <a href="classNumLib_1_1GaussLegendreIntegration.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:ac17517f46e5598287adc1aa17b70affc"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceNumLib.html#ac17517f46e5598287adc1aa17b70affc">TrapezoidalIntegration</a> (double x1, double x2, size_t N, const std::function&lt; double(double)&gt; &amp;f)</td></tr>
@@ -83,19 +90,19 @@ Functions</h2></td></tr>
 <tr class="memitem:a4a6af2e9f818b41da2ae8fa547760def"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceNumLib.html#a4a6af2e9f818b41da2ae8fa547760def">SimpsonIntegration</a> (double x1, double x2, size_t N, const std::function&lt; double(double)&gt; &amp;f)</td></tr>
 <tr class="memdesc:a4a6af2e9f818b41da2ae8fa547760def"><td class="mdescLeft">&#160;</td><td class="mdescRight">A numerical integration method using the simpson approach.  <a href="namespaceNumLib.html#a4a6af2e9f818b41da2ae8fa547760def">More...</a><br /></td></tr>
 <tr class="separator:a4a6af2e9f818b41da2ae8fa547760def"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aab774f3c358b2e55fc8026294d90eef2"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::vector&lt; double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceNumLib.html#aab774f3c358b2e55fc8026294d90eef2">RombergIntegration</a> (double x1, double x2, size_t N, const std::function&lt; double(double)&gt; &amp;f)</td></tr>
-<tr class="memdesc:aab774f3c358b2e55fc8026294d90eef2"><td class="mdescLeft">&#160;</td><td class="mdescRight">A numerical integration method using the romberg approach.  <a href="namespaceNumLib.html#aab774f3c358b2e55fc8026294d90eef2">More...</a><br /></td></tr>
-<tr class="separator:aab774f3c358b2e55fc8026294d90eef2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa466c1887f2392cd7a11756fee1c4822"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::vector&lt; double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceNumLib.html#aa466c1887f2392cd7a11756fee1c4822">RombergIntegration</a> (double x1, double x2, size_t N, const std::function&lt; double(double)&gt; &amp;f)</td></tr>
+<tr class="memdesc:aa466c1887f2392cd7a11756fee1c4822"><td class="mdescLeft">&#160;</td><td class="mdescRight">A numerical integration method using the romberg approach.  <a href="namespaceNumLib.html#aa466c1887f2392cd7a11756fee1c4822">More...</a><br /></td></tr>
+<tr class="separator:aa466c1887f2392cd7a11756fee1c4822"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="aab774f3c358b2e55fc8026294d90eef2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aab774f3c358b2e55fc8026294d90eef2">&#9670;&nbsp;</a></span>RombergIntegration()</h2>
+<a id="aa466c1887f2392cd7a11756fee1c4822"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa466c1887f2392cd7a11756fee1c4822">&#9670;&nbsp;</a></span>RombergIntegration()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt; std::vector&lt; double &gt; &gt; NumLib::RombergIntegration </td>
+          <td class="memname">std::vector&lt;std::vector&lt;double&gt; &gt; NumLib::RombergIntegration </td>
           <td>(</td>
           <td class="paramtype">double&#160;</td>
           <td class="paramname"><em>x1</em>, </td>
@@ -127,7 +134,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>A numerical integration method using the romberg approach. </p>
-<p>RombergIntegration is using the simpson approach to acomplish numerical integrations as described at <a href="https://thoughts-on-coding.com/2019/04/17/numerical-methods-in-cpp-part-1-newton-cotes-integration/">thoughts-on-coding.com</a> and calculates the integral of function \(f\) in range \([a-b]\).</p>
+<p>RombergIntegration is using the romberg approach to acomplish numerical integrations as described at <a href="https://thoughts-on-coding.com/2019/04/17/numerical-methods-in-cpp-part-1-newton-cotes-integration/">thoughts-on-coding.com</a> and calculates the integral of function \(f\) in range \([a-b]\).</p>
 <p class="formulaDsp">
 \[ R\left( 0,0 \right)=h_1\left( f\left( a \right) + f\left( b \right)\right) \]
 </p>
@@ -155,15 +162,6 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Integral of function \(f\) in range \([a-b]\) </dd></dl>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="namespaceNumLib_aab774f3c358b2e55fc8026294d90eef2_cgraph.png" border="0" usemap="#anamespaceNumLib_aab774f3c358b2e55fc8026294d90eef2_cgraph" alt=""/></div>
-<map name="anamespaceNumLib_aab774f3c358b2e55fc8026294d90eef2_cgraph" id="anamespaceNumLib_aab774f3c358b2e55fc8026294d90eef2_cgraph">
-<area shape="rect" title="A numerical integration method using the romberg approach." alt="" coords="5,5,192,32"/>
-<area shape="rect" href="namespaceNumLib.html#ac17517f46e5598287adc1aa17b70affc" title="A numerical integration method using the trapezoidal approach." alt="" coords="240,5,441,32"/>
-</map>
-</div>
 
 </div>
 </div>
@@ -315,9 +313,9 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespaceNumLib_ac17517f46e5598287adc1aa17b70affc_icgraph.png" border="0" usemap="#anamespaceNumLib_ac17517f46e5598287adc1aa17b70affc_icgraph" alt=""/></div>
 <map name="anamespaceNumLib_ac17517f46e5598287adc1aa17b70affc_icgraph" id="anamespaceNumLib_ac17517f46e5598287adc1aa17b70affc_icgraph">
-<area shape="rect" title="A numerical integration method using the trapezoidal approach." alt="" coords="240,31,441,57"/>
-<area shape="rect" href="namespaceNumLib.html#aab774f3c358b2e55fc8026294d90eef2" title="A numerical integration method using the romberg approach." alt="" coords="5,5,192,32"/>
-<area shape="rect" href="integration_8h.html#a3647f44eb2241c191ce095ac82684873" title=" " alt="" coords="50,56,147,83"/>
+<area shape="rect" title="A numerical integration method using the trapezoidal approach." alt="" coords="188,31,389,57"/>
+<area shape="rect" href="integration_8cpp.html#a75d980df9f3839f0a2c6662562da2b57" title=" " alt="" coords="5,5,140,32"/>
+<area shape="rect" href="integration_8h.html#a3647f44eb2241c191ce095ac82684873" title=" " alt="" coords="24,56,121,83"/>
 </map>
 </div>
 
