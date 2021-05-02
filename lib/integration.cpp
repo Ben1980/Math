@@ -1,7 +1,9 @@
 #include "integration.h"
 #include <iostream>
 
-double NumLib::TrapezoidalIntegration(double x1, double x2, size_t N, const std::function<double (double)> &f) {
+using namespace NumLib;
+
+double TrapezoidalIntegration(double x1, double x2, size_t N, const std::function<double (double)> &f) {
     if(f) {
         if(N < 1 ) N = 1;
         const double width = (x2-x1)/N;
@@ -20,7 +22,7 @@ double NumLib::TrapezoidalIntegration(double x1, double x2, size_t N, const std:
     return 0;
 }
 
-double NumLib::SimpsonIntegration(double x1, double x2, size_t N, const std::function<double (double)> &f) {
+double SimpsonIntegration(double x1, double x2, size_t N, const std::function<double (double)> &f) {
     if(f) {
         if(N < 1 ) N = 1;
         const double width = (x2-x1)/N;
@@ -39,7 +41,7 @@ double NumLib::SimpsonIntegration(double x1, double x2, size_t N, const std::fun
     return 0;
 }
 
-std::vector<std::vector<double>> NumLib::RombergIntegration(double x1, double x2, size_t N, const std::function<double (double)> &f) {
+std::vector<std::vector<double>> RombergIntegration(double x1, double x2, size_t N, const std::function<double (double)> &f) {
     if(N < 1 ) N = 1;
     std::vector<std::vector<double>> romberg_integral(N, std::vector<double>(N));
     
@@ -72,6 +74,68 @@ std::vector<std::vector<double>> NumLib::RombergIntegration(double x1, double x2
     return romberg_integral;
 }
 
-double NumLib::GaussLegendreIntegration::operator () (double x1, double x2, size_t N, const std::function<double (double)> &f) const {
+const double GaussLegendreIntegration::LegendrePolynomial::EPSILON = 1e-15;
 
+const std::vector<double> & GaussLegendreIntegration::LegendrePolynomial::getWeight() const {
+    return mWeight;
 }
+
+const std::vector<double> & GaussLegendreIntegration::LegendrePolynomial::getRoot() const {
+    return mRoot;
+}
+
+void GaussLegendreIntegration::LegendrePolynomial::calculateWeightAndRoot() {
+    for(int step = 0; step <= mNumberOfIterations; step++) {
+        double root = cos(M_PI * (step-0.25)/(mNumberOfIterations+0.5));
+        Result result = calculatePolynomialValueAndDerivative(root);
+
+        double newtonRaphsonRatio;
+        do {
+            newtonRaphsonRatio = result.value/result.derivative;
+            root -= newtonRaphsonRatio;
+            result = calculatePolynomialValueAndDerivative(root);
+        } while (fabs(newtonRaphsonRatio) > EPSILON);
+
+        mRoot[step] = root;
+        mWeight[step] = 2.0/((1-root*root)*result.derivative*result.derivative);
+    }
+}
+
+GaussLegendreIntegration::LegendrePolynomial::Result GaussLegendreIntegration::LegendrePolynomial::calculatePolynomialValueAndDerivative(double x) {
+    Result result(x, 0);
+
+    double value_minus_1 = 1;
+    const double f = 1/(x*x-1);
+    for(int step = 2; step <= mNumberOfIterations; step++) {
+        const double value = ((2*step-1)*x*result.value-(step-1)*value_minus_1)/step;
+        result.derivative = step*f*(x*value - result.value);
+
+        value_minus_1 = result.value;
+        result.value = value;
+    }
+
+    return result;
+}
+
+double GaussLegendreIntegration::operator () (double x1, double x2, size_t N, const std::function<double (double)> &f) const {
+    const LegendrePolynomial legendrePolynomial(x1, x2, N);
+    const std::vector<double> & weight = legendrePolynomial.getWeight();
+    const std::vector<double> & root = legendrePolynomial.getRoot();
+
+    const double width = 0.5*(x2-x1);
+    const double mean = 0.5*(x1+x2);
+
+    double gaussLegendre = 0;
+    for(int step = 1; step <= N; step++) {
+        gaussLegendre += weight[step]*f(width * root[step] + mean);
+    }
+
+    return gaussLegendre * width;
+}
+
+
+
+// NumLib::GaussLegendreIntegration::LegendrePolynomial(double lowerBound, double upperBound, size_t numberOfIterations)
+//     : mLowerBound(lowerBound), mUpperBound(upperBound), mNumberOfIterations(numberOfIterations), mWeight(numberOfIterations+1), mRoot(numberOfIterations+1) {
+//     calculateWeightAndRoot();
+// }

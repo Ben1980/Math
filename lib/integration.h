@@ -4,6 +4,7 @@
 #include <doctest/doctest.h>
 #include <functional>
 #include <vector>
+#include <cmath>
 
 namespace NumLib {
   /**
@@ -139,7 +140,10 @@ namespace NumLib {
     private:
       class LegendrePolynomial {
         public:
-            LegendrePolynomial(double lowerBound, double upperBound, size_t numberOfIterations);
+            LegendrePolynomial(double lowerBound, double upperBound, size_t numberOfIterations)
+              : mLowerBound(lowerBound), mUpperBound(upperBound), mNumberOfIterations(numberOfIterations), mWeight(numberOfIterations+1), mRoot(numberOfIterations+1) {
+              calculateWeightAndRoot();
+            }
 
             const std::vector<double> & getWeight() const;
 
@@ -297,6 +301,50 @@ TEST_CASE ("Test RombergIntegration, f=nullptr") {
   const double PI = 3.14159265358979323846;
 
   const double result = NumLib::RombergIntegration(0, 0.5*PI, 0, nullptr).back().back();
+  CHECK(TestUtils::IsValid(result, 0.0, 1e-3));
+}
+
+TEST_CASE ("Test GaussLegendreIntegration, valid case") {
+  const double PI = 3.14159265358979323846;
+  const double E = 2.71828182845904523536;
+
+  auto f = [E, PI](double x) { 
+    return 5.0/(std::pow(E, PI) - 2.0) * exp(2.0*x) * cos(x); 
+  };
+
+  const double result = NumLib::GaussLegendreIntegration()(0, 0.5*PI, 4, f);
+
+  CHECK(TestUtils::IsValid(result, 1.0, 1e-5));
+}
+
+TEST_CASE ("Test GaussLegendreIntegration, x1=x2=0") {
+  const double PI = 3.14159265358979323846;
+  const double E = 2.71828182845904523536;
+
+  auto f = [E, PI](double x) { 
+    return 5.0/(std::pow(E, PI) - 2.0) * exp(2.0*x) * cos(x); 
+  };
+
+  const double result = NumLib::GaussLegendreIntegration()(0, 0, 4, f);
+  CHECK(TestUtils::IsValid(result, 0.0, 1e-5));
+}
+
+TEST_CASE ("Test GaussLegendreIntegration, N=0") {
+  const double PI = 3.14159265358979323846;
+  const double E = 2.71828182845904523536;
+
+  auto f = [E, PI](double x) { 
+    return 5.0/(std::pow(E, PI) - 2.0) * exp(2.0*x) * cos(x); 
+  };
+
+  const double result = NumLib::GaussLegendreIntegration()(0, 0.5*PI, 0, f);
+  CHECK(TestUtils::IsValid(result, 0.18575, 1e-3));
+}
+
+TEST_CASE ("Test GaussLegendreIntegration, f=nullptr") {
+  const double PI = 3.14159265358979323846;
+
+  const double result = NumLib::GaussLegendreIntegration()(0, 0.5*PI, 0, nullptr);
   CHECK(TestUtils::IsValid(result, 0.0, 1e-3));
 }
 
