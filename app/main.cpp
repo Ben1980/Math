@@ -1,7 +1,7 @@
 #define DOCTEST_CONFIG_IMPLEMENT
 
 #include <doctest/doctest.h>
-#include "../lib/lib.h"
+#include "../lib/integration.h"
 
 int main(int argc, char** argv) {
     doctest::Context context;
@@ -13,7 +13,7 @@ int main(int argc, char** argv) {
     //     return res;
     // }
 
-    Library::PrintHelloWorld("Hello World!");
+    //Library::PrintHelloWorld("Hello World!");
 
     return res;
 }
